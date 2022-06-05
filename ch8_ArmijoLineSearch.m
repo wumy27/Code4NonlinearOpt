@@ -1,12 +1,14 @@
-function sstar = ch8_ArmijoLineSearch(f, xk)
-    % 对某点xk进行线搜索
+function sstar = ch8_ArmijoLineSearch(f, xk, p)
+    % 对某点xk沿着p进行线搜索
     syms s
     % 设计函数f'(x)
     df = jacobian(f,symvar(f));      % f的一阶导函数f'[vector]
     g = eval(subs(df,symvar(df),xk.')).';    % =f'(xk)要做一个转置
-    
-    % 满足(8.1.1)的搜索方向
-    p = -g;   % =-f'(xk)
+ 
+    % 输入的p需要满足(8.1.1)的搜索方向
+    if ~exist('p','var')
+        p = -g;   % =-f'(xk)
+    end
     
     % 超参数
     % C = 1.1; c = 0.1; eta1 = 0.1; eta2 = 0.1;

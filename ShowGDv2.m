@@ -1,4 +1,4 @@
-function ShowGD(method_name,x_list,y_list)
+function ShowGDv2(method_name,x_list,y_list)
     %% plot 2d function optimization on 3d space
     % input :
     %     method_name  : the name of iterative optimization method
@@ -9,20 +9,25 @@ function ShowGD(method_name,x_list,y_list)
     %     figure in one
     %
     % usage example :
-    %     method_name = '某某法';x_list = [1:-0.2:0];y_list = [-1:0.2:0];ShowGD(method_name,x_list,y_list);
-    %    
-    % todo: 标注出起始点和终止点 completed
+    %     method_name = '某某法';x_list = [1:-0.2:0];y_list = [-1:0.2:0];ShowGDv2(method_name,x_list,y_list);
+    %     
+    % todo: 绘制f(x,y)s.t.g(x,y)<=0的图像 completed 2022/06/04
     
-    %% f(X,Y)对应图形
-    % 定义曲面图的范围
-    f =@(X,Y) -2.*cos(X) - cos(Y) - cos(X-Y);
-    [X,Y] = meshgrid([-10:0.5:10]);    % origin: -10:10
+    %% 绘制优化问题对应图形
+    % f(X,Y)
+    f =@(X,Y) -(X.^2+Y.^2-1).^2-((2.*X.^2-1).^2+(2.*Y.^2-1).^2-2/3).^2;
+    [X,Y] = meshgrid([-2:0.05:2]); 
     Z = f(X,Y);
+
+    % g(x,y)<=0
+    g =@(X,Y) 18.*X.^2 - 18.*X - 42.*X.^4 - 42.*X.^3 + 17.*X.^5 + 17.*X.^6 -3.*X.*Y + 2.*Y - 8.*Y.^2 - 8.*Y.^3 + 16.*Y.^4 -2;
+    % 将Z中g(x,y)>0的点设置为NaN
+    Z(g(X,Y)>0)=nan;
 
     % 绘制曲面图和等高线图
     figure;
     sc = surfc(X,Y,Z,Z,'FaceAlpha',0.2,'EdgeColor','none');hold on;colorbar;
-    D2_locz = min(Z(:))-1;            % 二维图像所处的z坐标值
+    D2_locz = min(Z(:))-1;           % 二维图像所处的z坐标值
     sc(2).ZLocation = D2_locz;   % sc(1)是surf, sc(2)是contour
 
     % 绘制负梯度系统
@@ -63,6 +68,5 @@ function ShowGD(method_name,x_list,y_list)
     quiver3(x_list(1:end-1),y_list(1:end-1),z_list(1:end-1),u,v,w,'b','LineWidth',2,'MaxHeadSize',0.5,'AutoScale','off');hold on;   % ,'AutoScaleFactor',scale,'AutoScale','on'
     scatter3(ori_tar_x,ori_tar_y,ori_tar_z,50,'p','filled');hold on;
     
-    xlabel('x_1');ylabel('x_2');zlabel('f(x_1,x_2)');title(method_name);  
-    
+    xlabel('x_1');ylabel('x_2');zlabel('f(x_1,x_2)');title(method_name);
 end
