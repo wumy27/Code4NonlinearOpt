@@ -5,7 +5,9 @@ clear all;close all;
 syms X Y
 f = -2*cos(X) - cos(Y) - cos(X-Y);
 X0 = [-5;-2];
+p = [-1,-1];
 
 %% Line Search Algorithm
-sstar = ch8_ArmijoLineSearch(f, X0)  % 可以额外添加一个搜索方向p
-sstar = ch8_ModifiedArmijoLS(f, X0)  % 可以额外添加一个搜索方向p
+sstar = ch8_PerfectLineSearch(f, X0, p)  
+sstar = ch8_ArmijoLineSearch(f, X0, p) 
+sstar = ch8_ModifiedArmijoLS(f, X0, p)  
