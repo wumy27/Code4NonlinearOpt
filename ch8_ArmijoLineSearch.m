@@ -17,7 +17,7 @@ function sstar = ch8_ArmijoLineSearch(f, xk, p)
     sstar = 1; smin = 0;
     % 设定比率函数
     fxk = eval(subs(f,symvar(f),xk.'));
-    D = matlabFunction(subs(f,symvar(f),[xk+s.*p].')-fxk)./(s.*p.'*g);
+    D = matlabFunction(subs(f,symvar(f),(xk+s.*p).')-fxk)./(s.*p.'*g);
         % 分子 = f(xk+s.*p)-f(xk)
     while true    % 扩大步数，让s远离0
         if abs(1-eval(subs(D,s,sstar)))<eta2   % D(sstar)

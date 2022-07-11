@@ -1,6 +1,5 @@
 function SurfCG(f)
     % plot surface contour gradient of f 
-
     % 绘制曲面图和等高线图
     [X,Y] = meshgrid([-10:0.5:10]);    % origin: -10:10
     Z = f(X,Y);

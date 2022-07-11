@@ -4,6 +4,10 @@
 
 作者: [BevanWu](mailto:bevn2wu@outlook.com)
 
+first create date: 2022/05/25
+
+last modified date: 2022/06/09
+
 ## Section 1 - 无约束优化算法
 
 Section One以下面问题为例，展示各算法的迭代过程
@@ -40,9 +44,23 @@ Section One以下面问题为例，展示各算法的迭代过程
 
 ## Section 2 - 有约束优化算法
 
-to be continued ....
+除chapter21 section5的两种SQP方法外，所有有约束算法已全部复现完成。
 
 
+
+`ch24_Ztest.m`是用来求解如下的有约束最优化问题
+
+![ConstraintOptProblem](README.assets/ConstraintOptProblem.png)
+
+但最后发现复现的算法无法求解该问题。
+
+
+
+
+
+version one completed on July 11st, 2022.
+
+author: Bevan Wu.
 
 
 

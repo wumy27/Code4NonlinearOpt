@@ -7,7 +7,7 @@ function X_list = ch9_NewtonMethod(f, x0, epsilon)
         xk = X_list(:,end);
         % 计算当前迭代点的一阶和二阶信息
         gk = eval(subs(df,symvar(df),xk.')).';   % =f'(xk) 要做一个转置
-        Gk = eval(subs(d2f,symvar(d2f),xk.'));   % 对称矩阵
+        Gk = eval(subs(d2f,symvar(d2f),xk.'));    % 对称矩阵
         
         %% 判断Gk是否正定
         % method-1  22/5[ArmijoLineSearch/ModifiedArmijoLS]
